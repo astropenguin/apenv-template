@@ -1,7 +1,7 @@
 # Makefile
 
-.PHONY: all
-all:
+.PHONY: template-help
+template-help:
 	@echo "Usage:"
 	@echo "    make:            show this help and exit"
 	@echo "    make initialize: link and then restore"
@@ -9,39 +9,44 @@ all:
 	@echo "    make link:       help string of link"
 	@echo "    make unlink:     help string of unlink"
 	@echo "    make restore:    help string of restore"
-	@echo "    make backup:     help string of restore"
+	@echo "    make backup:     help string of backup"
 
-# apenv targets
-TARGETS_INITALIZE += initialize
-TARGETS_FINALIZE  += finalize
-TARGETS_LINK      += link
-TARGETS_UNLINK    += unlink
-TARGETS_RESTORE   += restore
-TARGETS_BACKUP    += backup
-
-# targets
-.PHONY: confirm
-confirm:
-	@read -p "press any key to continue: "
+# aliases
 
 .PHONY: initialize
-initialize: confirm link restore
+initialize: template-link
+initialize: template-restore
 
 .PHONY: finalize
-finalize: confirm backup unlink
+finalize: template-backup
+finalize: template-unlink
 
 .PHONY: link
-link: confirm
-	@echo link!
+link: template-link
 
 .PHONY: unlink
-unlink: confirm
-	@echo unlink!
+unlink: template-unlink
 
 .PHONY: restore
-restore: confirm
-	@echo restore!
+restore: template-restore
 
 .PHONY: backup
-backup: confirm
+backup: template-backup
+
+# targets
+
+.PHONY: template-link
+template-link:
+	@echo link!
+
+.PHONY: template-unlink
+template-unlink:
+	@echo unlink!
+
+.PHONY: template-restore
+template-restore:
+	@echo restore!
+
+.PHONY: template-backup
+template-backup:
 	@echo backup!
