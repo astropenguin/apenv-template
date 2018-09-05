@@ -11,6 +11,10 @@ template-help:
 	@echo "    make restore:    help string of restore"
 	@echo "    make backup:     help string of backup"
 
+# local variable
+
+TEMPLATE_DIR := $(dir $(lastword $(MAKEFILE_LIST)))
+
 # aliases
 
 .PHONY: initialize
